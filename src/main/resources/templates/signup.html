@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<header  >
+    <nav class="nav" >
+        <ul >
+            <li >  <a href="/login" > Login</a> </li>
+
+
+            <!--            <div sec:authorize="isAuthenticated()">-->
+            <!--                <li >-->
+            <!--                    <a href="/logout" > Logout</a>-->
+            <!--                </li>-->
+
+            <!--                <li >-->
+            <!--                    <a href="/addPost" > Post</a>-->
+            <!--                </li>-->
+
+            <!--                <li >-->
+            <!--                    <a href="/myprofile" > Profile</a>-->
+            <!--                </li>-->
+            <!--            </div>-->
+        </ul>
+    </nav>
+
+</header>
+
+
+<form action="/signup" method="post" >
+    <fieldset>
+        <legend> Sign Up:</legend>
+
+        <label for="username"> User Name:</label>
+        <input id="username" name="username" type="text">
+        <br>
+        <br>
+
+        <label for="password"> Password: </label>
+        <input id="password" name="password" type="password">
+        <br>
+        <br>
+        <label for="firstName"> First Name:</label>
+        <input id="firstName" name="firstName" type="text">
+        <br>
+        <br>
+        <label for="lastName"> Last Name: </label>
+        <input id="lastName" name="lastName" type="text">
+        <br>
+        <br>
+        <label for="dateOfBirth"> Date Of Birth:</label>
+        <input id="dateOfBirth" name="dateOfBirth" type="text">
+        <br>
+        <br>
+        <label for="bio"> Bio: </label>
+        <input id="bio" name="bio" type="text">
+        <br>
+        <br>
+        <input type="submit" value="Sign Up">
+    </fieldset>
+
+</form>
+</main>
+
+
+
+
+
+
+
+
+</body>
+</html>
