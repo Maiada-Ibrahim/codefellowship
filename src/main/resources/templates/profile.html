@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -9,24 +9,64 @@
 </head>
 <body>
 <heder>
-    <div sec:authorize="isAuthenticated()">
-
-        <li >
-            <a href="" > Logout</a>
-        </li>
-
-        <li >
-            <a href="" > Post</a>
-        </li>
-
-        <li >
-            <a href="/profile" > Profile</a>
-        </li>
+    <div th:insert="nav :: header"></div>
+    <p th:text="${username}"></p>
 
 
-    </div>
+    <!--    <div sec:authorize="isAuthenticated()">-->
+<!--        <li >-->
+<!--            <a href="/perform_logout" > Logout</a>-->
+<!--        </li>-->
+
+<!--        <li >-->
+<!--            <a href="" > Post</a>-->
+<!--        </li>-->
+
+<!--        <li >-->
+<!--            <a href="/profile" > Profile</a>-->
+<!--        </li>-->
+<!--        <li >-->
+<!--            <a href="/" > Profile</a>-->
+<!--        </li>-->
+
+<!--    </div>-->
 
 </heder>
-<p> hallo</p>
+<main >
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">ID: <span th:text="${id}"></span></li>
+        <li class="list-group-item">Username: <span th:text="${username}"></span></li>
+        <li class="list-group-item">First Name: <span th:text="${firstName}"></span></li>
+        <li class="list-group-item">Last Name: <span th:text="${lastName}"></span></li>
+        <li class="list-group-item">Date Of Birth: <span th:text="${dateOfBirth}"></span></li>
+        <li class="list-group-item">Bio: <span th:text="${bio}"></span></li>
+    </ul>
+
+
+<!--    <form action="/profile" method="post" >-->
+<!--    <fieldset>-->
+<!--        <legend> add post:</legend>-->
+<!--&lt;!&ndash;        <label > her write post</label>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input id="addpost" name="addpost" type="text">&ndash;&gt;-->
+<!--&lt;!&ndash;        <br>&ndash;&gt;-->
+<!--&lt;!&ndash;        <br>&ndash;&gt;-->
+<!--        <label for="body">Post</label>-->
+<!--        <input type="text" name="body" id="body" class="form-control mb-4 col-4" >-->
+<!--        <input type="submit" value="add">-->
+<!--    </fieldset>-->
+<!--    </form>-->
+    <form action="/profile" method="post">
+        <label for="body">Post</label>
+        <input type="text" name="body" id="body" >
+        <input type="submit" value="add post">
+    </form>
+
+    <div th:each="onepost:${user.getPostsForAll()}">
+<!--        <h2 th:text="${onepost.id}"></h2>-->
+        <h2 th:text="${onepost.getBody()}"></h2>
+        <h2 th:text="${onepost.createdAt}"></h2>
+    </div>
+
+</main>
 </body>
 </html>

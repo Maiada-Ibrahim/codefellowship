@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -8,15 +8,36 @@
     <title>Document</title>
 </head>
 <body>
-<header  >
-    <nav class="nav" >
-        <ul >
-               <li> <a href="/"  > Home</a> </li>
-                <li >  <a href="/login" > Login</a> </li>
-                <li > <a href="/signup" > SignUp</a> </li>
 
-        </ul>
-    </nav>
+<header  >
+    <div th:insert="nav :: header"></div>
+    <p th:text="${username}"></p>
+
+
+        <!--    <nav class="nav" >-->
+<!--        <ul >-->
+<!--               <li> <a href="/"  > Home</a> </li>-->
+<!--                <li >  <a href="/login" > Login</a> </li>-->
+<!--                <li > <a href="/signup" > SignUp</a> </li>-->
+<!--            <div sec:authorize="isAuthenticated()">-->
+
+<!--                <li >-->
+<!--                    <a href="/perform_logout" > Logout</a>-->
+<!--                </li>-->
+
+<!--                <li >-->
+<!--                    <a href="" > Post</a>-->
+<!--                </li>-->
+
+<!--                <li >-->
+<!--                    <a href="/profile" > Profile</a>-->
+<!--                </li>-->
+
+
+<!--            </div>-->
+
+<!--        </ul>-->
+<!--    </nav>-->
 
 </header>
 <main>

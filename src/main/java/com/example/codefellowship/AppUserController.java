@@ -11,22 +11,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.view.RedirectView;
+
+import java.security.Principal;
 
 @Controller
 public class AppUserController {
     @Autowired
     UserRepository userRepository;
-
+    @Autowired
+    PostRepository postRepository;
 //        @Autowired
 //        BCryptPasswordEncoder encode;
     @Autowired
 PasswordEncoder encoder;
 
-
-    @GetMapping("/")
-    public String home(){
-        return ("home.html");
-    }
+//
+//    @GetMapping("/")
+//    public String home(){
+//        return ("home.html");
+//    }
 
     @GetMapping("/signup")
     public String getSignUpPage(){
@@ -51,8 +55,32 @@ public String profile(@PathVariable("id") int id, Model m){
     m.addAttribute("data",user);
     return "profile.html";
 }
-    @GetMapping("/profile")
-    public String profile(){
-        return "profile";
+    @GetMapping("/")
+    public String getHomePage(Principal principalgetdata, Model model){
+        if(principalgetdata==null){
+            return "error.html";
+        } else {
+            model.addAttribute("username", principalgetdata.getName());
+            return "home.html";
+        }
+    }
+@GetMapping("/profile")
+public String myprofile(Model model, Principal principal) {
+    ApplicationUser user = userRepository.findByUsername(principal.getName());
+model.addAttribute("user",user);
+    model.addAttribute("username", user.getUsername());
+    model.addAttribute("id", user.getId());
+    model.addAttribute("firstName", user.getFirstName());
+    model.addAttribute("lastName", user.getLastName());
+    model.addAttribute("dateOfBirth", user.getDateOfBirth());
+    model.addAttribute("bio", user.getBio());
+    return "profile";
+}
+
+    @PostMapping("/profile")
+    public RedirectView postprofile(Principal p, @RequestParam String body){
+        Post newpost= new Post(body,userRepository.findByUsername(p.getName()));
+        postRepository.save(newpost);
+        return new RedirectView("/profile");
     }
 }
