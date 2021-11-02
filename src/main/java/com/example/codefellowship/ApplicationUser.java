@@ -29,8 +29,10 @@ public class ApplicationUser implements UserDetails {
         this.dateOfBirth = dateOfBirth;
         this.bio = bio;
     }
-    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-    private List<Post> posts= new ArrayList<>();
+    @OneToMany(mappedBy = "owner")
+    List<Post> postsForAll;
+//    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+//    private List<Post> posts= new ArrayList<>();
 
 
 
@@ -126,5 +128,13 @@ public class ApplicationUser implements UserDetails {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public List<Post> getPostsForAll() {
+        return postsForAll;
+    }
+
+    public void setPostsForAll(List<Post> postsForAll) {
+        this.postsForAll = postsForAll;
     }
 }
