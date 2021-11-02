@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head >
+    <link th:href="@{navcss.css}" rel="stylesheet">
+
+</head>
+<body>
+<div th:insert="nav :: header"></div>
+
+<main>
+    <div id="box">
+
+        <div th:each="following:${followings}" class="container" >
+<!--            <p th:text="${following.firstName}+'  '+${following.lastName} "></p>-->
+                        <p th:text="${following.username} "></p>
+                        <a th:href="@{'/profile/'+${following.id}}"> Profile</a>
+            <p > Posts</p>
+            <div th:each="post:${following.getPostsForAll()}" class="posts" >
+                <p th:text="${post.body}"></p>
+
+            </div>
+            <br>
+            <br>
+            <br>
+        </div>
+    </div>
+
+    <!--    <table>-->
+    <!--        <tr>-->
+    <!--            <th> Name</th>-->
+    <!--            <th> Show </th>-->
+    <!--        </tr>-->
+    <!--        <tr th:each="following:${followings}">-->
+    <!--            <td th:text="${following.firstName}+'  '+${following.lastName} "></td>-->
+
+    <!--        </tr>-->
+    <!--    </table>-->
+
+</main>
+<!--<footer th:replace="fragment :: footer" ></footer>-->
+</body>
+</html>

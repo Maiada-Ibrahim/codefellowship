@@ -12,6 +12,7 @@ public class Post {
     private LocalDate createdAt;
 
     @ManyToOne
+    @JoinColumn(name="Post_Owner")
     private ApplicationUser owner;
 
 

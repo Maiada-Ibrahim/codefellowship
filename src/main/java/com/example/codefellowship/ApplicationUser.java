@@ -29,10 +29,8 @@ public class ApplicationUser implements UserDetails {
         this.dateOfBirth = dateOfBirth;
         this.bio = bio;
     }
-    @OneToMany(mappedBy = "owner")
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     List<Post> postsForAll;
-//    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
-//    private List<Post> posts= new ArrayList<>();
 
 
 
@@ -45,6 +43,16 @@ public class ApplicationUser implements UserDetails {
         this.username = username;
         this.password = password;
 
+    }
+
+
+    public ApplicationUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.bio = bio;
     }
 
     @Override
@@ -136,5 +144,31 @@ public class ApplicationUser implements UserDetails {
 
     public void setPostsForAll(List<Post> postsForAll) {
         this.postsForAll = postsForAll;
+    }
+    @ManyToMany
+    @JoinTable(
+            name="user_user",
+            joinColumns = {@JoinColumn(name="from_id")},
+            inverseJoinColumns = {@JoinColumn(name="to_id")}
+    )
+    public List<ApplicationUser> following;
+
+    @ManyToMany(mappedBy="following", fetch = FetchType.EAGER)
+    public List<ApplicationUser> follower;
+
+    public List<ApplicationUser> getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(ApplicationUser addfollowing) {
+        this.following.add(addfollowing);
+    }
+
+    public List<ApplicationUser> getFollower() {
+        return follower;
+    }
+
+    public void setFollower(List<ApplicationUser> follower) {
+        this.follower = follower;
     }
 }

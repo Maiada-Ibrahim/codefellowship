@@ -50,3 +50,17 @@ spring.jpa.hibernate.ddl-auto=create
 - ("/login"): to login
 - ("/signup"): to signup
 - ("/profile"): to see your profile and posts.
+
+
+
+
+## (lab18+19); we build on the work made at the last labs on which two pages were added:
+- (/suggest) : this  will list all of the users so the user can add any one at the list to his following list
+ to create this feature many to many relation were created in the Application users (following/ follower)
+
+-  the (/feed) path list all the people in the following list so that you can see there post beside that the user can access to there profile.
+
+- the application is checked to be immune against sql and html injection.
+
+- Thymeleaf fragment were used to improve the performance plus insure a unique header and footer for all pages.
+- three pages (/signup,/ login,/home)  were tested using MockMvc, and the result is pass.
