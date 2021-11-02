@@ -3,17 +3,18 @@ body {
   margin: 0px;
 }
 nav {
-  margin-top: 40px;
+  margin-top: 0px;
+
   padding: 24px;
   text-align: center;
   font-family: Raleway;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 #nav-1 {
-  background: #3fa46a;
+  background: #41374f;
 }
 #nav-2 {
-  background: #5175C0;
+  background: #41374f;
 }
 #nav-3 {
   background: #EEA200;
@@ -21,14 +22,14 @@ nav {
 
 .link-1 {
   transition: 0.3s ease;
-  background: #3fa46a;
+  background: #41374f;
   color: #ffffff;
   font-size: 20px;
   text-decoration: none;
   border-top: 4px solid #3fa46a;
   border-bottom: 4px solid #3fa46a;
   padding: 20px 0;
-  margin: 0 20px;
+  margin-left:  100px;
 }
 .link-1:hover {
   border-top: 4px solid #ffffff;

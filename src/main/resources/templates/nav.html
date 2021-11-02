@@ -41,11 +41,22 @@
 //-----------------------------------------------------------------
 <div id="container"  th:fragment="header">
     <nav id="nav-1">
-        <a class="link-1" href="/">Home</a>
+        <div sec:authorize ="isAnonymous()">
         <a class="link-1" href="/login">Login</a>
         <a class="link-1" href="/signup">SignUp</a>
-        <a class="link-1" href="/profile">Profile</a>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+                        <a class="link-1" href="/">Home</a>
+
+            <a class="link-1" href="/perform_logout">Logout</a>
+            <a class="link-1" href="/profile">Profile</a>
+            <a class="link-1" href="/suggest" > Suggestion</a>
+            <a class="link-1" href="/followList" > Feed</a>
+        </div>
+
     </nav>
+    <p sec:authorize="isAuthenticated()" id="user"> User Name:    <span sec:authentication="name" >Bob</span>  </p>
 
 
     </div>
