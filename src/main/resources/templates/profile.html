@@ -7,7 +7,39 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link th:href="@{navcss.css}" rel="stylesheet">
     <link th:href="@{profile.css}" rel="stylesheet">
+    <style>
+body {
+      background: #F2F2F2;
+      font-family: -apple-system, BlinkMacSystemFont, San Francisco, Helvetica Neue, Helvetica, Arial, sans-serif,'微軟正黑體';
+    }
+nav {
+  margin-top: 0px;
 
+  padding: 24px;
+  text-align: center;
+  font-family: Raleway;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+#nav-1 {
+  background: #41374f;
+}
+.link-1 {
+  transition: 0.3s ease;
+  background: #41374f;
+  color: #ffffff;
+  font-size: 20px;
+  text-decoration: none;
+  border-top: 4px solid #3fa46a;
+  border-bottom: 4px solid #3fa46a;
+  padding: 20px 0;
+  margin-left:  100px;
+}
+.link-1:hover {
+  border-top: 4px solid #ffffff;
+  border-bottom: 4px solid #ffffff;
+  padding: 6px 0;
+}
+</style>
     <title>Document</title>
 </head>
 <body>
@@ -15,7 +47,7 @@
 <heder>
     <div class="profiles">
         <div class="profiles__group"></div>
-            <img src="https://images.unsplash.com/photo-1525591932088-8eb7ed314934?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ" alt="">
+            <img src="https://www.freeiconspng.com/thumbs/profile-icon-png/profile-icon-9.png" alt="">
 <!--            <p th:text="${username}"></p>-->
         </div>
 
@@ -46,11 +78,34 @@
     <h1> Posts:</h1>
     <div id="containerPost">
 
-    <div th:each="writePost:${user.getPostsForAll()}">
-<!--        <h2 th:text="${writePost.id}"></h2>-->
-        <h2 th:text="${writePost.getBody()}"></h2>
-        <h2 th:text="${writePost.createdAt}"></h2>
+<!--    <div th:each="writePost:${user.getPostsForAll()}">-->
+<!--&lt;!&ndash;        <h2 th:text="${writePost.id}"></h2>&ndash;&gt;-->
+<!--        <h2 th:text="${writePost.getBody()}"></h2>-->
+<!--        <h2 th:text="${writePost.createdAt}"></h2>-->
+<!--    </div>-->
     </div>
+    <div class="comments-container"   th:each="writePost:${user.getPostsForAll()}">
+<!--        <h1>Comentarios <a href="http://creaticode.com">creaticode.com</a></h1>-->
+
+        <ul id="comments-list" class="comments-list">
+            <li>
+                <div class="comment-main-level">
+                    <!-- Avatar -->
+                    <div class="comment-avatar"><img src="http://i9.photobucket.com/albums/a88/creaticode/avatar_1_zps8e1c80cd.jpg" alt=""></div>
+                    <!-- Contenedor del Comentario -->
+                    <div class="comment-box">
+                        <div class="comment-head">
+<!--                            <h6 class="comment-name by-author" th:text="${writePost.username}"></h6>-->
+                            <span th:text="${writePost.createdAt}"></span>
+                            <i class="fa fa-reply"></i>
+                            <i class="fa fa-heart"></i>
+                        </div>
+                        <div class="comment-content" th:text="${writePost.getBody()}">
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
     </div>
 </main>
 </body>
