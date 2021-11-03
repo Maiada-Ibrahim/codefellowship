@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -43,7 +44,7 @@ PasswordEncoder encoder;
 
 
     @PostMapping("/signup")
-    public RedirectView newUser(@RequestParam(value="username") String username,@RequestParam(value="password") String password,@RequestParam(value="firstName") String firstName,@RequestParam(value="lastName") String lastName,@RequestParam(value="dateOfBirth") String dateOfBirth,@RequestParam(value="bio") String bio  ){
+    public RedirectView newUser(@RequestParam(value="username") String username, @RequestParam(value="password") String password, @RequestParam(value="firstName") String firstName, @RequestParam(value="lastName") String lastName, @RequestParam(value="dateOfBirth") String dateOfBirth, @RequestParam(value="bio") String bio  ){
         ApplicationUser newUser = new ApplicationUser(username,encoder.encode(password),firstName,lastName,dateOfBirth,bio);
         newUser=userRepository.save(newUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(newUser,null, new ArrayList<>());
@@ -52,9 +53,15 @@ PasswordEncoder encoder;
     }
     @GetMapping("/login")
     public String getLoginPage(){
-        return "login";
-    }
 
+            return "login";
+
+    }
+//    @GetMapping("/error")
+//    public String error(){
+//        return "error.html";
+//
+//    }
 @GetMapping("/users/{id}")
 public String profile(@PathVariable("id") int id, Model m){
     ApplicationUser user  = userRepository.findById(id).get();
@@ -62,24 +69,21 @@ public String profile(@PathVariable("id") int id, Model m){
     return "profile.html";
 }
     @GetMapping("/")
-    public String getHomePage(Principal principalgetdata, Model model){
-        if(principalgetdata==null){
-            return "error.html";
-        } else {
-            model.addAttribute("username", principalgetdata.getName());
+    public String getHomePage(){
+
             return "home.html";
-        }
+
     }
 @GetMapping("/profile")
 public String myprofile(Model model, Principal principal) {
     ApplicationUser user = userRepository.findByUsername(principal.getName());
     model.addAttribute("user",user);
-//    model.addAttribute("username", user.getUsername());
-//    model.addAttribute("id", user.getId());
-//    model.addAttribute("firstName", user.getFirstName());
-//    model.addAttribute("lastName", user.getLastName());
-//    model.addAttribute("dateOfBirth", user.getDateOfBirth());
-//    model.addAttribute("bio", user.getBio());
+    model.addAttribute("username", user.getUsername());
+    model.addAttribute("id", user.getId());
+    model.addAttribute("firstName", user.getFirstName());
+    model.addAttribute("lastName", user.getLastName());
+    model.addAttribute("dateOfBirth", user.getDateOfBirth());
+    model.addAttribute("bio", user.getBio());
     return "profile";
 }
 
