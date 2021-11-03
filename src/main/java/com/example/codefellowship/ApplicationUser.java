@@ -1,5 +1,6 @@
 package com.example.codefellowship;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,6 +19,8 @@ public class ApplicationUser implements UserDetails {
     private String firstName;
     private String lastName;
     private String dateOfBirth;
+
+
     private String  bio;
 
     public ApplicationUser(int id, String username, String password, String firstName, String lastName, String dateOfBirth, String bio) {
