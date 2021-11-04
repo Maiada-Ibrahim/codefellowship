@@ -10,23 +10,38 @@
 <div th:insert="nav :: header"></div>
 
 <main>
-    <div id="box">
+<!--    <div id="box">-->
 
-        <div th:each="following:${followings}" class="container" >
-<!--            <p th:text="${following.firstName}+'  '+${following.lastName} "></p>-->
-                        <p th:text="${following.username} "></p>
-                        <a th:href="@{'/profile/'+${following.id}}"> Profile</a>
+<!--        <div th:each="following:${followings}" class="container" >-->
+<!--&lt;!&ndash;            <p th:text="${following.firstName}+'  '+${following.lastName} "></p>&ndash;&gt;-->
+<!--                        <p th:text="${following.username} "></p>-->
+<!--                        <a th:href="@{'/profile/'+${following.id}}"> Profile</a>-->
+<!--            <p > Posts</p>-->
+<!--            <div th:each="post:${following.getPostsForAll()}" class="posts" >-->
+<!--                <p th:text="${post.body}"></p>-->
+
+<!--            </div>-->
+<!--            <br>-->
+<!--            <br>-->
+<!--            <br>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+    <div>
+        <div class="card" style="width: 18rem;"  th:each="following:${followings}">
+            <img style="width: 200px;" src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="no pic"/>
+            <p th:text="${following.username} "></p>
+            <a th:href="@{'/profile/'+${following.id}}"> Profile</a>
             <p > Posts</p>
             <div th:each="post:${following.getPostsForAll()}" class="posts" >
                 <p th:text="${post.body}"></p>
 
-            </div>
-            <br>
-            <br>
-            <br>
         </div>
+            <br/><br/><br/>
+            <br/><br/><br/>
+            <br/><br/><br/>
     </div>
-
     <!--    <table>-->
     <!--        <tr>-->
     <!--            <th> Name</th>-->
