@@ -5,7 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.Collection;
 import java.util.List;
 
@@ -14,16 +14,17 @@ public class ApplicationUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id ;
+//    @Column(unique = true)
     private String username;
     private String password;
     private String firstName;
     private String lastName;
-    private String dateOfBirth;
+    private Date dateOfBirth;
 
 
     private String  bio;
 
-    public ApplicationUser(int id, String username, String password, String firstName, String lastName, String dateOfBirth, String bio) {
+    public ApplicationUser(int id, String username, String password, String firstName, String lastName, Date  dateOfBirth, String bio) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -49,7 +50,7 @@ public class ApplicationUser implements UserDetails {
     }
 
 
-    public ApplicationUser(String username, String password, String firstName, String lastName, String dateOfBirth, String bio) {
+    public ApplicationUser(String username, String password, String firstName, String lastName, Date dateOfBirth, String bio) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -86,6 +87,14 @@ public class ApplicationUser implements UserDetails {
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
+    }
+
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
@@ -125,13 +134,8 @@ public class ApplicationUser implements UserDetails {
         this.lastName = lastName;
     }
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
+
 
     public String getBio() {
         return bio;

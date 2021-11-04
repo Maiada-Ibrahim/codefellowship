@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.view.RedirectView;
 
 import java.security.Principal;
+import java.sql.Date;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -44,7 +44,7 @@ PasswordEncoder encoder;
 
 
     @PostMapping("/signup")
-    public RedirectView newUser(@RequestParam(value="username") String username, @RequestParam(value="password") String password, @RequestParam(value="firstName") String firstName, @RequestParam(value="lastName") String lastName, @RequestParam(value="dateOfBirth") String dateOfBirth, @RequestParam(value="bio") String bio  ){
+    public RedirectView newUser(@RequestParam(value="username") String username, @RequestParam(value="password") String password, @RequestParam(value="firstName") String firstName, @RequestParam(value="lastName") String lastName, @RequestParam(value="dateOfBirth") Date dateOfBirth, @RequestParam(value="bio") String bio  ){
         ApplicationUser newUser = new ApplicationUser(username,encoder.encode(password),firstName,lastName,dateOfBirth,bio);
         newUser=userRepository.save(newUser);
         Authentication authentication = new UsernamePasswordAuthenticationToken(newUser,null, new ArrayList<>());
@@ -57,11 +57,11 @@ PasswordEncoder encoder;
             return "login";
 
     }
-//    @GetMapping("/error")
-//    public String error(){
-//        return "error.html";
-//
-//    }
+    @GetMapping("/error")
+    public static String error(){
+        return "error.html";
+
+    }
 @GetMapping("/users/{id}")
 public String profile(@PathVariable("id") int id, Model m){
     ApplicationUser user  = userRepository.findById(id).get();
@@ -69,7 +69,7 @@ public String profile(@PathVariable("id") int id, Model m){
     return "profile.html";
 }
     @GetMapping("/")
-    public String getHomePage(){
+    public static String getHomePage(){
 
             return "home.html";
 
@@ -129,4 +129,5 @@ public String myprofile(Model model, Principal principal) {
         m.addAttribute("user",following);
         return ("profile.html");
     }
+
 }
